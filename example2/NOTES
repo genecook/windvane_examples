@@ -1,0 +1,10 @@
+Summary
+
+  Simple paging test.
+
+  Assembly language used to create minimal EL1/EL0 MMU setup, paging enabled, 'escape' to EL0, a few token
+  instructions issued, test ends.
+
+  The resulting assembled (object file) test is simulated to create a simuation trace. The resulting trace may be viewed
+  using the simtrace viewer. Note the translations (use simtrace viewer) include the descriptors accessed.
+

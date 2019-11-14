@@ -1,0 +1,16 @@
+Hello World c example.
+
+Generate a minimum C program to run on the a64sim simulator.
+
+Notes
+------------------
+1. We're using the Linaro supplied aarch64 toolchain.
+2. This is a 'bare metal' example. 
+3. crt0.s - our custom startup code. Inits stack, clears bss, calls main, then _exit.
+4. my_stubs.c - minimum system functions that need to be present if the newlib system
+                functions are not used.
+		_outbyte function writes to a64sim uart; characters written then to stdout.
+5. main.c - uses (newlib) puts function to print the usual 'Hello World' greeting.
+6. See also newlib porting guide.
+
+

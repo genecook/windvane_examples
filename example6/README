@@ -1,0 +1,27 @@
+Multi-core assembly language test. When multiple cores are configured  in the simulator,
+each core boots (starts execution) from the same reset address (and of course then
+execute the same code). Each core has a unique processor ID. In this test each core uses
+its processor ID to form a unique address to branch to.
+
+Boot sequence (for each core):
+     1. Read processor ID register, strip all but low order 8 bits.
+     2. Shift the remaining 8 bits left by 12 bits.
+     3. Branch to resulting core-specific address.
+
+After branching each core reaches uninitialized memory. The a64sim 'freerun' option comes
+into play, causing random instructions to be inserted into memory and executed by each
+core, until the specified maximum # of instructions has been reached.
+A wfi instruction is stuffed into memory (again, do to the 'freerun' mode being enabled)
+to cause a particular core to 'halt'. All cores must halt for simulation to terminate.
+
+The 'freerun' random-test code was originally implemented to allow the simulator itself
+to be tested and not intended for production, but was left in as it does make a nice example!
+
+
+NOTE: Freerun mode is only intended to executely cleanly at EL0. Random execution at higher
+      privilege levels can (and most likely) will cause side effects.
+
+HINT: The simtrace-viewer currently only displayes the trace for a single core. You can specify
+      the core # when the simtrace-viewer is started, or you can switch between cores by changing
+      thc core # displayed.
+      

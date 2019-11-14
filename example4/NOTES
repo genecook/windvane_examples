@@ -1,0 +1,14 @@
+Summary
+
+The assembly language test executes at EL0, and causes two exceptions : UNDEF, (invalid add) and SVC. Simple exception handlers
+are included in the assembly.
+
+	 
+
+
+
+
+
+
+
+

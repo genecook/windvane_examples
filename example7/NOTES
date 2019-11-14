@@ -1,0 +1,21 @@
+In this assembly language example, multiple cores 'sync up' using a shared counter,
+and WFE/SEV instructions. In the test each core (other than core 0) uses a load/store
+exclusive sequence within a loop, in order to increment a counter. Each core loops
+until success, ie, until it is able to increment the shared counter, then (via WFE instruction)
+enters a wait-state.
+Core 0 waits for the shared counter value to reach the number of configured cores,
+and then wakes all other cores up via SEV instruction.
+All cores then issue wfi's to halt, and end the simulation.
+
+The a64sim simulator includes support for a single global monitor, shared among all cores. When
+the MMU is disabled, it is ASSUMED that all memory is sharable, and thus the global
+monitor is usable. When the MMU is enabled the global monitor is only accessible
+from mapped 'sharable' memory.
+The a64sim simulator supports MP, but not threading, and thus there is no support (yet) for
+local monitors,
+
+From the test it is of course also inferred that the a64sim simulator models wait-states. The
+WFE instruction causes a core to wait (goto sleep if you will). The SEV instruction in turn may
+be used to wak up sleeping cores. The SEVL instruction (again, since there are no local monitors)
+is same as NOP.
+
